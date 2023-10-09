@@ -17,22 +17,33 @@
         </v-chip>
     </v-card-text>
     <v-card-action>
-      <v-btn @click="increment" color="orange-lighten-2">Agregar</v-btn>
+      <v-btn @click="addProduct" color="orange-lighten-2">Agregar</v-btn>
     </v-card-action>
   </v-card>
 </template>
 
 <script lang="ts">
+import { useCartStore } from '../stores/cart';
+
+import type { PropType } from 'vue';
+import type { Product } from '../model/types';
+
 export default {
   data() {
     return {
       count: 0,
     };
   },
-  props: ["product"],
+  props: {
+    product: {
+      type: Object as PropType<Product>,
+      required: true,
+    }
+  },
   methods: {
-    increment() {
-      this.count *= 1;
+    addProduct() {
+      const castStore = useCartStore();
+      castStore.addProduct(this.product.id)
     },
   },
   mounted() {
