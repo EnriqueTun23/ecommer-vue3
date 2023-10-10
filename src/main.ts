@@ -15,6 +15,9 @@ import router from './router'
 
 const app = createApp(App)
 
+// icons
+import '@mdi/font/css/materialdesignicons.css'
+
 const vuetify = createVuetify({
     components,
     directives,
