@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-img
-      src="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      :src="productImageUrl"
       height="200px"
       cover
     />
@@ -40,10 +40,15 @@ export default {
       required: true,
     }
   },
+  computed: {
+    productImageUrl() {
+      return this.product.image ?? 'https://m.media-amazon.com/images/I/91Fg-Dbk-eL._AC_UF894,1000_QL80_.jpg'
+    }
+  },
   methods: {
     addProduct() {
       const castStore = useCartStore();
-      castStore.addProduct(this.product.id)
+      castStore.addProduct(this.product)
     },
   },
   mounted() {
