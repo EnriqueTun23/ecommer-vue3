@@ -8,9 +8,11 @@ export interface Product {
     price: number,
     id: number,
     image: string,
+    categoryId: number,
 }
 
 export interface Categories {
     name: string,
     id: number,
+    descripcion: string,
 }

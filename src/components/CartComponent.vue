@@ -11,6 +11,7 @@ export default {
     CardItem,
   },
   computed: {
+    // importacion de estados
     ...mapState(useCartStore, ["details"]),
   },
 };

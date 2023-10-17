@@ -14,6 +14,7 @@ export default {
     },
   },
   methods: {
+    // importacion de acciones
     ...mapActions(useCartStore, {
       decrementQuantity: "decrement",
       incrementQuantity: "increment",

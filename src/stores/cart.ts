@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import type { CartDetail, Product } from '@/model/types';
 
 export const useCartStore = defineStore('cart', {
+  // Estados
   state: () => ({
     details: [] as CartDetail[]
   }),
