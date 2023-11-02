@@ -4,6 +4,7 @@ import { defineStore } from  'pinia';
 export const useProductsStore = defineStore('products',  {
     // Estados generales de productos
     state: () => ({
+        order: '' as string,
         categoryId: null as number | null,
         _products: [
             {
@@ -52,17 +53,52 @@ export const useProductsStore = defineStore('products',  {
     }),
     getters: {
       products(state) {
-        if (!state.categoryId) {
-          return state._products;
+        let products = null;
+        // Filter
+        if (state.categoryId) {
+          products = state._products.filter(p => p.categoryId === state.categoryId)
+        } else {
+          products = state._products;
         }
 
-        return state._products.filter(p => p.categoryId === state.categoryId)
+        // order
+        if (state.order === '') {
+          return products;
+        }
+
+        if (state.order === 'price') {
+          return products.sort((a, b) => a.price - b.price)
+        }
+
+        if (state.order === 'priceDesc') {
+          return products.sort((a, b) => b.price - a.price)
+        }
+
+        if (state.order === 'name') {
+          return products.sort((a, b) => a.name.localeCompare(b.name) )
+        }
+
+        if (state.order === 'nameDesc') {
+          return products.sort((a, b) => b.name.localeCompare(a.name) )
+        }
       }
     },
     // Acciones 
     actions: {
-      selectCategory(id: number) {
+      selectCategory(id: number|null) {
         this.categoryId = id
+      },
+      orderByPrice() {
+        this.order = 'price'
+      },
+      orderByPriceDesc() {
+        this.order = 'priceDesc'
+      },
+      orderByName() {
+        this.order = 'name'
+      },
+      orderByNameDesc() { 
+        this.order = 'nameDesc'
       }
     }
 })
